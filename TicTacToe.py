@@ -117,8 +117,11 @@ def cells(step, symbol):
 
 def tictactoe_player_1():
     cell_result()
-    cell_player_1 = input("↑ ход игрока x = ")
-    cells(cell_player_1, "x")
+    cell_player_1 = input("↑ ход игрока x = ").lower()
+    if cell_player_1 == "exit":
+        print("========== Конец игры ==========")
+    else:
+        cells(cell_player_1, "x")
 
 
 def tictactoe_player_2():
@@ -126,8 +129,11 @@ def tictactoe_player_2():
     global cell_step
     if cell_step < 4:  # Это проверка на количество ходов игрока о.
         cell_step += 1
-        cell_player_2 = input("↑ ход игрока o = ")
-        cells(cell_player_2, "o")
+        cell_player_2 = input("↑ ход игрока o = ").lower()
+        if cell_player_2 == "exit":
+            print("========== Конец игры ==========")
+        else:
+            cells(cell_player_2, "o")
     else:
         print("========== Конец игры ==========")
 
@@ -135,6 +141,9 @@ def tictactoe_player_2():
 def start(player):
     if player == "y":
         print("Ход игры подается без пробелов между цифр, например (11)правильно, (1 1)неправильно")
+        print("На данный момент игра не может определит выиграл ли игрок по диагонали")
+        print("если это случилось впишите команду exit")
+        print()
         print("Игрок x начинает первый :)")
         tictactoe_player_1()
     else:
