@@ -1,12 +1,16 @@
+# Игру разработал студент (Leonids Jofe) из школы SkillFactory, курс Full-stack python developer, класс FPW-104
+
 starting_space = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
 
 cell_step = 0
 
 
-def over(result=0):
+def over():
     row = -1
     column = -1
-
+    result = False
+    # Здесь я должен был написать алгоритм на проверку по диагонали, но не додумался как лучше это сделать.
+    # Были варианты, но все приводило к ошибке с выводом победы.
     for i in range(len(starting_space)):
         column_win_x = 0
         column_win_o = 0
@@ -83,10 +87,10 @@ def cells(step, symbol):
         if starting_space[int(step[0])][int(step[1])] == "x":
             print(f"Ячейка {int(step[0]), int(step[1])} занята вами")
             tictactoe_player_1()
-        else:
+        if starting_space[int(step[0])][int(step[1])] == "-":
             starting_space[int(step[0])][int(step[1])] = symbol
-            if over():
-                print("=============================")
+            if over():  # Это проверка на конец игры.
+                print("========== Конец игры ==========")
                 cell_result()
                 print(over())
             else:
@@ -101,10 +105,10 @@ def cells(step, symbol):
             print(f"Ячейка {int(step[0]), int(step[1])} занята вами")
             cell_step -= 1
             tictactoe_player_2()
-        else:
+        if starting_space[int(step[0])][int(step[1])] == "-":
             starting_space[int(step[0])][int(step[1])] = symbol
             if over():
-                print("=============================")
+                print("========== Конец игры ==========")
                 cell_result()
                 print(over())
             else:
@@ -120,12 +124,12 @@ def tictactoe_player_1():
 def tictactoe_player_2():
     cell_result()
     global cell_step
-    if cell_step < 4:
+    if cell_step < 4:  # Это проверка на количество ходов игрока о.
         cell_step += 1
         cell_player_2 = input("↑ ход игрока o = ")
         cells(cell_player_2, "o")
     else:
-        return over()
+        print("========== Конец игры ==========")
 
 
 def start(player):
